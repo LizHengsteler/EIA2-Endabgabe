@@ -4,38 +4,44 @@ namespace Firework {
 
     //let imageData: ImageData;
     export let crc2: CanvasRenderingContext2D;
-    export let emitters: Emitter[] =[];
-    let daten1String:string[];
-    let daten2String:string[];
+    export let emitters: Emitter[] = [];
+    let daten1String: string[];
+    let daten2String: string[];
     
-    let auswahl:number = 0;
+    let auswahl: number = 0;
     export enum TASK {
         WAIT,
         CATCH
     }
    
-    interface Feuerwerk{
-            color:string
-            form:string
-            radius:number
+    interface Feuerwerk {
+            [key: string]: string
+            
     }
-    interface Sammlung{
-        feuerwerksdaten:Feuerwerk
+    interface Sammlung {
+        feuerwerksdaten: Feuerwerk;
     }
-   let responsedata:any[]
-    let responseArray:Sammlung[];
+    let responsedata: any[];
+    let responseArray: Sammlung[];
     
     async function send(_query: string): Promise<boolean> {
        
        
     
         let response: Response = await fetch(_query);
-        let daten:string = await response.text();
+        let daten: string = await response.text();
         console.log(daten);
     
-        responsedata = <Sammlung[]>JSON.parse(daten);
-        responseArray = <Sammlung[]>responsedata.data;
-        console.log(responseArray[0]);
+        responsedata = <Feuerwerk[]>JSON.parse(daten);
+        responseArray = <Feuerwerk[]>responsedata.data;
+        console.log(responseArray['0'].radius);
+for(let i:number = responseArray.length-1; i>responseArray.length-5;i--){
+
+    console.log(responseArray[''+i].radius);
+       let auswahlDiv:any = document.getElementsByClassName("raketen")[responseArray.length-i-1];
+       auswahlDiv.setAttribute("id",""+i);
+       auswahlDiv.addEventListener("click", changeauswahl);
+}
        
         return true;
       }
@@ -45,7 +51,12 @@ namespace Firework {
 
 
 
-    let img:any ;
+    let img: any ;
+
+function changeauswahl(e:Event):void{
+    auswahl= Number(e.target.id);
+}
+
     function handleLoad(_event: Event): void {
         send("https://webuser.hs-furtwangen.de/~zuefflet/Database/?command=find&collection=Feuerwerk");
         let canvas: HTMLCanvasElement = document.querySelector("canvas")!;
@@ -58,27 +69,27 @@ namespace Firework {
         crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
             
         canvas.addEventListener("click", (event) => {
-            const mouseX:number = event.clientX;
-            const mouseY:number = event.clientY;
-        createBoom(mouseX,mouseY, auswahl);
+            const mouseX: number = event.clientX;
+            const mouseY: number = event.clientY;
+            createBoom(mouseX, mouseY, auswahl);
         });
 
     
     
         
         
-        createBoom(0,0,0);
+       
         //Cloud.addEventListener("mousedown", moveCloud);
         window.setInterval(update, 50);
         
         }
-        function update(): void {
+    function update(): void {
         
             crc2.beginPath();
             crc2.globalAlpha = 0.2;
-            crc2.drawImage(img,0,0,window.innerWidth,window.innerHeight);
+            crc2.drawImage(img, 0, 0, window.innerWidth, window.innerHeight);
             crc2.closePath();
-            for(let i: number = 0; i < emitters.length; i++){
+            for (let i: number = 0; i < emitters.length; i++) {
             
                 emitters[i].life();
             
@@ -88,20 +99,14 @@ namespace Firework {
             
         }
 
-        function createBoom(mouseX:number, mouseY:number, auswahl:number): void{
+    function createBoom(mouseX: number, mouseY: number, auswahl: number): void {
 
-            if(auswahl == 0){
-                let emitter:Emitter = new Emitter(mouseX, mouseY,"rgb(255,255,0",2, "kreis");
+           
+                console.log(responseArray[''+auswahl].radius);
+                let emitter:Emitter = new Emitter(mouseX, mouseY,responseArray[''+auswahl].color,responseArray[''+auswahl].radius ,responseArray[''+auswahl].form);
                 emitters.push(emitter);
-            }
+            
         
-            if(auswahl == 1){
-                let emitter:Emitter = new Emitter(mouseX, mouseY,"rgb(0,255,0",5, "rect");
-                emitters.push(emitter);
-            }
-            if(auswahl == 2){
-                let emitter:Emitter = new Emitter(mouseX, mouseY,"rgb(255,0,255",5, "kreis");
-                emitters.push(emitter);
-            }
+        
         }
  }

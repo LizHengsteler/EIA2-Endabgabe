@@ -19,11 +19,20 @@ var Firework;
         console.log(daten);
         responsedata = JSON.parse(daten);
         responseArray = responsedata.data;
-        console.log(responseArray[0]);
+        console.log(responseArray['0'].radius);
+        for (let i = responseArray.length - 1; i > responseArray.length - 5; i--) {
+            console.log(responseArray['' + i].radius);
+            let auswahlDiv = document.getElementsByClassName("raketen")[responseArray.length - i - 1];
+            auswahlDiv.setAttribute("id", "" + i);
+            auswahlDiv.addEventListener("click", changeauswahl);
+        }
         return true;
     }
     // show MingiDB's response in the textarea
     let img;
+    function changeauswahl(e) {
+        auswahl = Number(e.target.id);
+    }
     function handleLoad(_event) {
         send("https://webuser.hs-furtwangen.de/~zuefflet/Database/?command=find&collection=Feuerwerk");
         let canvas = document.querySelector("canvas");
@@ -38,7 +47,6 @@ var Firework;
             const mouseY = event.clientY;
             createBoom(mouseX, mouseY, auswahl);
         });
-        createBoom(0, 0, 0);
         //Cloud.addEventListener("mousedown", moveCloud);
         window.setInterval(update, 50);
     }
@@ -52,18 +60,9 @@ var Firework;
         }
     }
     function createBoom(mouseX, mouseY, auswahl) {
-        if (auswahl == 0) {
-            let emitter = new Firework.Emitter(mouseX, mouseY, "rgb(255,255,0", 2, "kreis");
-            Firework.emitters.push(emitter);
-        }
-        if (auswahl == 1) {
-            let emitter = new Firework.Emitter(mouseX, mouseY, "rgb(0,255,0", 5, "rect");
-            Firework.emitters.push(emitter);
-        }
-        if (auswahl == 2) {
-            let emitter = new Firework.Emitter(mouseX, mouseY, "rgb(255,0,255", 5, "kreis");
-            Firework.emitters.push(emitter);
-        }
+        console.log(responseArray['' + auswahl].radius);
+        let emitter = new Firework.Emitter(mouseX, mouseY, responseArray['' + auswahl].color, responseArray['' + auswahl].radius, responseArray['' + auswahl].form);
+        Firework.emitters.push(emitter);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=main.js.map
