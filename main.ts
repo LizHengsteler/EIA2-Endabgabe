@@ -5,36 +5,39 @@ namespace Firework {
     //let imageData: ImageData;
     export let crc2: CanvasRenderingContext2D;
     export let emitters: Emitter[] =[];
-
+    let daten1String:string[];
+    let daten2String:string[];
+    
     let auswahl:number = 0;
     export enum TASK {
         WAIT,
         CATCH
     }
-
+   
     interface Feuerwerk{
             color:string
             form:string
             radius:number
     }
-    interface DatenFeuer{
-        id:string
-        feuerwerk:Feuerwerk
+    interface IchStecheucxhalleab{
+        feuerwerksdaten:Feuerwerk
     }
-    let responseArray:DatenFeuer[];
-
+   let responsedata:any[]
+    let responseArray:IchStecheucxhalleab[];
+    let responsestringrteestduhurensohnichfickdich:string;
     async function send(_query: string): Promise<boolean> {
        
        
     
         let response: Response = await fetch(_query);
-        let daten:any = await response.text();
+        let daten:string = await response.text();
         console.log(daten);
-
-        responseArray = JSON.parse(daten);
+    
+        responsedata = <IchStecheucxhalleab[]>JSON.parse(daten);
+        responseArray = <IchStecheucxhalleab[]>responsedata.data;
+        console.log(responseArray[0]);
         
-        console.log(responseArray);
-
+        console.log(responsestringrteestduhurensohnichfickdich);
         return true;
       }
     

@@ -3,19 +3,25 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     Firework.emitters = [];
+    let daten1String;
+    let daten2String;
     let auswahl = 0;
     let TASK;
     (function (TASK) {
         TASK[TASK["WAIT"] = 0] = "WAIT";
         TASK[TASK["CATCH"] = 1] = "CATCH";
     })(TASK = Firework.TASK || (Firework.TASK = {}));
+    let responsedata;
     let responseArray;
+    let responsestringrteestduhurensohnichfickdich;
     async function send(_query) {
         let response = await fetch(_query);
         let daten = await response.text();
         console.log(daten);
-        responseArray = JSON.parse(daten);
-        console.log(responseArray);
+        responsedata = JSON.parse(daten);
+        responseArray = responsedata.data;
+        console.log(responseArray[0]);
+        console.log(responsestringrteestduhurensohnichfickdich);
         return true;
     }
     // show MingiDB's response in the textarea

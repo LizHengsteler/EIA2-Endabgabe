@@ -58,7 +58,6 @@ var Firework;
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.arc(this.mouseX + this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2, 0, Math.PI * 2);
-                    Firework.crc2.fill();
                     Firework.crc2.closePath();
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
