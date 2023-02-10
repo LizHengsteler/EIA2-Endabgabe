@@ -3,14 +3,25 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     Firework.emitters = [];
-    let auswahl = 1;
+    let auswahl = 0;
     let TASK;
     (function (TASK) {
         TASK[TASK["WAIT"] = 0] = "WAIT";
         TASK[TASK["CATCH"] = 1] = "CATCH";
     })(TASK = Firework.TASK || (Firework.TASK = {}));
+    let responseArray;
+    async function send(_query) {
+        let response = await fetch(_query);
+        let daten = await response.text();
+        console.log(daten);
+        responseArray = JSON.parse(daten);
+        console.log(responseArray);
+        return true;
+    }
+    // show MingiDB's response in the textarea
     let img;
     function handleLoad(_event) {
+        send("https://webuser.hs-furtwangen.de/~zuefflet/Database/?command=find&collection=Feuerwerk");
         let canvas = document.querySelector("canvas");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -42,7 +53,7 @@ var Firework;
             Firework.emitters.push(emitter);
         }
         if (auswahl == 1) {
-            let emitter = new Firework.Emitter(mouseX, mouseY, "rgb(0,255,0", 5, "stern");
+            let emitter = new Firework.Emitter(mouseX, mouseY, "rgb(0,255,0", 5, "rect");
             Firework.emitters.push(emitter);
         }
         if (auswahl == 2) {

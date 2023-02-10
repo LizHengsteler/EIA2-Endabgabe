@@ -5,11 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css" >
-  <link rel="preconnect" href="https://fonts.googleapis.com"> 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
   <title>MingiDB-Client</title>
+  <style>
+    span {
+      display: inline-block;
+      width: 5em;
+    }
+
+    button {
+      display: inline-block;
+      width: 6em;
+      margin: 1em 0em;
+    }
+    #query {
+      width: 40em;
+    }
+  </style>
   <script src="Client.js"></script>
 </head>
 
@@ -26,24 +37,13 @@
     </fieldset>
     <fieldset>
       <legend>Document</legend>
-      <p> is an arbitrary structure for demonstration. </p>
+      This is an arbitrary structure for demonstration.
       <a href="javascript:">Fill</a>
       <a href="javascript:">Clear</a>
       <br/><br/>
-      <span>Color</span><input type="text" name="color" id="color" /><br />
-      <span>Radius</span><input type="range" name="radius" id="radius" min="2" max="8" /><br />
-      <div class="radioGroup">
-      <span>Form</span> 
-      <label for="rectangle">Kreis</label>  
-        <input type="radio" name="form" id="circle" value="kreis" />    
-        <label for="rectangle">rectangle</label>      
-        <input type="radio" name="form" id="rectangle" value="rect" />
-        <label for="rectangle">Stern</label>  
-        <input type="radio" name="form" id="star" value="stern" />
-        <label for="star"> <img src="stern_weiß.png" alt="" srcset=""></label>  
-    </div>
-      <br />
-     
+      <span>Color</span><input type="text" name="color" id="" title="Enter a family name of a student"/><br />
+      <span>Radius</span><input type="text" name="radius" id="" title="Enter a firstname"/><br />
+      <span>Form</span><input type="text" name="form" id=""  title="Enter the age"/><br />
     
       <button type="button" title="insert the document into the current collection">insert</button>
       <button type="button" title="delete the document with the id given below from the current collection">delete</button>
