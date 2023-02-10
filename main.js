@@ -13,7 +13,6 @@ var Firework;
     })(TASK = Firework.TASK || (Firework.TASK = {}));
     let responsedata;
     let responseArray;
-    let responsestringrteestduhurensohnichfickdich;
     async function send(_query) {
         let response = await fetch(_query);
         let daten = await response.text();
@@ -21,7 +20,6 @@ var Firework;
         responsedata = JSON.parse(daten);
         responseArray = responsedata.data;
         console.log(responseArray[0]);
-        console.log(responsestringrteestduhurensohnichfickdich);
         return true;
     }
     // show MingiDB's response in the textarea

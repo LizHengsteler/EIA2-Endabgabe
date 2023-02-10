@@ -19,12 +19,12 @@ namespace Firework {
             form:string
             radius:number
     }
-    interface IchStecheucxhalleab{
+    interface Sammlung{
         feuerwerksdaten:Feuerwerk
     }
    let responsedata:any[]
-    let responseArray:IchStecheucxhalleab[];
-    let responsestringrteestduhurensohnichfickdich:string;
+    let responseArray:Sammlung[];
+    
     async function send(_query: string): Promise<boolean> {
        
        
@@ -33,11 +33,10 @@ namespace Firework {
         let daten:string = await response.text();
         console.log(daten);
     
-        responsedata = <IchStecheucxhalleab[]>JSON.parse(daten);
-        responseArray = <IchStecheucxhalleab[]>responsedata.data;
+        responsedata = <Sammlung[]>JSON.parse(daten);
+        responseArray = <Sammlung[]>responsedata.data;
         console.log(responseArray[0]);
-        
-        console.log(responsestringrteestduhurensohnichfickdich);
+       
         return true;
       }
     
