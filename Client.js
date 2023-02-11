@@ -10,7 +10,7 @@
 var testMingiDB;
 (function (testMingiDB) {
     window.addEventListener("load", start);
-    let database = "https://webuser.hs-furtwangen.de/~zuefflet/Database/";
+    let database = "https://webuser.hs-furtwangen.de/~hengstel/Database/";
     console.log(database);
     // check if a MingiDB installation is referred to as the parameter for the client
     async function start(_event) {
@@ -19,7 +19,7 @@ var testMingiDB;
         }
         catch (_e) {
             let output = `Add the correct address of your database as get-parameter in the url.\n`;
-            output += `https://webuser.hs-furtwangen.de/~zuefflet/Database/\n\n`;
+            output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
             output += _e;
             output += `\n\nSee more information in the console.`;
             alert(output);
@@ -50,7 +50,7 @@ var testMingiDB;
         let id = formdata.get("id");
         let query = `?command=${command}&collection=${collection}`;
         let data = {};
-        ["color", "radius", "form"].forEach((_color) => { if (formdata.get(_color))
+        ["color", "radius", "shape"].forEach((_color) => { if (formdata.get(_color))
             data[_color] = formdata.get(_color); });
         switch (command) {
             case "delete":
@@ -76,7 +76,7 @@ var testMingiDB;
     // for convenience, clear or randomly fill the fields of the document-fieldset when clicking on the anchors
     function hndAnchor(_event) {
         let command = _event.target.textContent;
-        let fields = ["color", "radius", "form"];
+        let fields = ["color", "radius", "shape"];
         console.log(command);
         switch (command) {
             case "Clear":
@@ -92,7 +92,7 @@ var testMingiDB;
                         case "radius":
                             element.value = "10";
                             break;
-                        case "form":
+                        case "shape":
                             element.value = Math.random() < 0.5 ? "rect" : "kreis";
                             break;
                     }

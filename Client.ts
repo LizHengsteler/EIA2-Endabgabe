@@ -8,8 +8,8 @@
  */
 namespace testMingiDB {
   window.addEventListener("load", start);
-  let database: string = "https://webuser.hs-furtwangen.de/~zuefflet/Database/";
-console.log(database);
+  let database: string = "https://webuser.hs-furtwangen.de/~hengstel/Database/";
+  console.log(database);
   // check if a MingiDB installation is referred to as the parameter for the client
   async function start(_event: Event): Promise<void> {
     try {
@@ -17,7 +17,7 @@ console.log(database);
       
     } catch (_e: unknown) {
       let output: string = `Add the correct address of your database as get-parameter in the url.\n`;
-      output += `https://webuser.hs-furtwangen.de/~zuefflet/Database/\n\n`;
+      output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
       output += _e;
       output += `\n\nSee more information in the console.`;
       alert(output);
@@ -53,7 +53,7 @@ console.log(database);
     let id: FormDataEntryValue = formdata.get("id");
     let query: string = `?command=${command}&collection=${collection}`;
     let data: Object = {};
-    ["color", "radius", "form"].forEach(
+    ["color", "radius", "shape"].forEach(
       (_color) => { if (formdata.get(_color)) data[_color] = formdata.get(_color); }
     );
 
@@ -84,7 +84,7 @@ console.log(database);
   // for convenience, clear or randomly fill the fields of the document-fieldset when clicking on the anchors
   function hndAnchor(_event: Event): void {
     let command: string = (<HTMLElement>_event.target).textContent;
-    let fields: string[] = ["color", "radius", "form"];
+    let fields: string[] = ["color", "radius", "shape"];
     console.log(command);
     switch (command) {
       case "Clear":
@@ -100,7 +100,7 @@ console.log(database);
             case "radius":
               element.value = "10";
               break;
-            case "form":
+            case "shape":
               element.value = Math.random() < 0.5 ? "rect" : "kreis";
               break;
            

@@ -5,22 +5,23 @@ namespace Firework {
     //let imageData: ImageData;
     export let crc2: CanvasRenderingContext2D;
     export let emitters: Emitter[] = [];
-    let daten1String: string[];
-    let daten2String: string[];
+    let img: any ;
+   // let daten1String: string[];
+   // let daten2String: string[];
     
-    let auswahl: number = 0;
+    let selection: number = 0;
     export enum TASK {
         WAIT,
         CATCH
     }
    
-    interface Feuerwerk {
+    interface Firework {
             [key: string]: string
             
     }
-    interface Sammlung {
-        feuerwerksdaten: Feuerwerk;
-    }
+   /* interface Sammlung {
+        feuerwerksdaten: Firework;
+    }*/
     let responsedata: any[];
     let responseArray: Sammlung[];
     
@@ -29,18 +30,18 @@ namespace Firework {
        
     
         let response: Response = await fetch(_query);
-        let daten: string = await response.text();
-        console.log(daten);
+        let data: string = await response.text();
+        console.log(data);
     
-        responsedata = <Feuerwerk[]>JSON.parse(daten);
-        responseArray = <Feuerwerk[]>responsedata.data;
-        console.log(responseArray['0'].radius);
-for(let i:number = responseArray.length-1; i>responseArray.length-5;i--){
+        responsedata = <Firework[]>JSON.parse(data);
+        responseArray = <Firework[]>responsedata.data;
+        console.log(responseArray[ '0' ].radius);
+        for( let i: number = responseArray.length - 1; i > responseArray.length - 5; i --) {
 
     console.log(responseArray[''+i].radius);
-       let auswahlDiv:any = document.getElementsByClassName("raketen")[responseArray.length-i-1];
-       auswahlDiv.setAttribute("id",""+i);
-       auswahlDiv.addEventListener("click", changeauswahl);
+    let selectionDiv: any = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
+    selectionDiv.setAttribute("id",""+i);
+    selectionDiv.addEventListener("click", changeselection);
 }
        
         return true;
@@ -51,14 +52,14 @@ for(let i:number = responseArray.length-1; i>responseArray.length-5;i--){
 
 
 
-    let img: any ;
+    
 
-function changeauswahl(e:Event):void{
-    auswahl= Number(e.target.id);
+    function changeselection(e: Event): void {
+    selection = Number(e.target.id);
 }
 
     function handleLoad(_event: Event): void {
-        send("https://webuser.hs-furtwangen.de/~zuefflet/Database/?command=find&collection=Feuerwerk");
+        send("https://webuser.hs-furtwangen.de/~hengstel/Database/?command=find&collection=Feuerwerk");
         let canvas: HTMLCanvasElement = document.querySelector("canvas")!;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -71,7 +72,7 @@ function changeauswahl(e:Event):void{
         canvas.addEventListener("click", (event) => {
             const mouseX: number = event.clientX;
             const mouseY: number = event.clientY;
-            createBoom(mouseX, mouseY, auswahl);
+            createBoom(mouseX, mouseY, selection);
         });
 
     
@@ -99,11 +100,11 @@ function changeauswahl(e:Event):void{
             
         }
 
-    function createBoom(mouseX: number, mouseY: number, auswahl: number): void {
+    function createBoom(mouseX: number, mouseY: number, selection: number): void {
 
            
-                console.log(responseArray[''+auswahl].radius);
-                let emitter:Emitter = new Emitter(mouseX, mouseY,responseArray[''+auswahl].color,responseArray[''+auswahl].radius ,responseArray[''+auswahl].form);
+                console.log(responseArray[''+selection].radius);
+                let emitter: Emitter = new Emitter(mouseX, mouseY, responseArray[''+selection].color, responseArray[''+selection].radius , responseArray[''+selection].shape);
                 emitters.push(emitter);
             
         

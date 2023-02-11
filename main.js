@@ -3,38 +3,41 @@ var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
     Firework.emitters = [];
-    let daten1String;
-    let daten2String;
-    let auswahl = 0;
+    let img;
+    // let daten1String: string[];
+    // let daten2String: string[];
+    let selection = 0;
     let TASK;
     (function (TASK) {
         TASK[TASK["WAIT"] = 0] = "WAIT";
         TASK[TASK["CATCH"] = 1] = "CATCH";
     })(TASK = Firework.TASK || (Firework.TASK = {}));
+    /* interface Sammlung {
+         feuerwerksdaten: Firework;
+     }*/
     let responsedata;
     let responseArray;
     async function send(_query) {
         let response = await fetch(_query);
-        let daten = await response.text();
-        console.log(daten);
-        responsedata = JSON.parse(daten);
+        let data = await response.text();
+        console.log(data);
+        responsedata = JSON.parse(data);
         responseArray = responsedata.data;
         console.log(responseArray['0'].radius);
         for (let i = responseArray.length - 1; i > responseArray.length - 5; i--) {
             console.log(responseArray['' + i].radius);
-            let auswahlDiv = document.getElementsByClassName("raketen")[responseArray.length - i - 1];
-            auswahlDiv.setAttribute("id", "" + i);
-            auswahlDiv.addEventListener("click", changeauswahl);
+            let selectionDiv = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
+            selectionDiv.setAttribute("id", "" + i);
+            selectionDiv.addEventListener("click", changeselection);
         }
         return true;
     }
     // show MingiDB's response in the textarea
-    let img;
-    function changeauswahl(e) {
-        auswahl = Number(e.target.id);
+    function changeselection(e) {
+        selection = Number(e.target.id);
     }
     function handleLoad(_event) {
-        send("https://webuser.hs-furtwangen.de/~zuefflet/Database/?command=find&collection=Feuerwerk");
+        send("https://webuser.hs-furtwangen.de/~hengstel/Database/?command=find&collection=Feuerwerk");
         let canvas = document.querySelector("canvas");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -45,7 +48,7 @@ var Firework;
         canvas.addEventListener("click", (event) => {
             const mouseX = event.clientX;
             const mouseY = event.clientY;
-            createBoom(mouseX, mouseY, auswahl);
+            createBoom(mouseX, mouseY, selection);
         });
         //Cloud.addEventListener("mousedown", moveCloud);
         window.setInterval(update, 50);
@@ -59,9 +62,9 @@ var Firework;
             Firework.emitters[i].life();
         }
     }
-    function createBoom(mouseX, mouseY, auswahl) {
-        console.log(responseArray['' + auswahl].radius);
-        let emitter = new Firework.Emitter(mouseX, mouseY, responseArray['' + auswahl].color, responseArray['' + auswahl].radius, responseArray['' + auswahl].form);
+    function createBoom(mouseX, mouseY, selection) {
+        console.log(responseArray['' + selection].radius);
+        let emitter = new Firework.Emitter(mouseX, mouseY, responseArray['' + selection].color, responseArray['' + selection].radius, responseArray['' + selection].shape);
         Firework.emitters.push(emitter);
     }
 })(Firework || (Firework = {}));
