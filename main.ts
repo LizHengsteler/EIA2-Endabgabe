@@ -17,7 +17,7 @@ namespace Firework {
     //let imageData: ImageData;
     export let crc2: CanvasRenderingContext2D;
     export let emitters: Emitter[] = [];
-    let img: any ;
+    let img: HTMLImageElement;
    // let daten1String: string[];
    // let daten2String: string[];
     
@@ -100,9 +100,7 @@ namespace Firework {
             crc2.drawImage(img, 0, 0, window.innerWidth, window.innerHeight);
             crc2.closePath();
             for (let i: number = 0; i < emitters.length; i++) {
-            
                 emitters[i].life();
-            
             }
             
         
