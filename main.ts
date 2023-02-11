@@ -1,4 +1,16 @@
 namespace Firework {
+     /*Aufgabe: Endabgabe
+      Name: Liz Hengsteler
+      Matrikel: 268386
+      Datum: 12.02.2023
+      Zusammenarbeit: Kristoffer Müller und Theo Züffle
+      Quellen: Inverted Classroom, Jirka Videos + Code
+      W3Schools
+      Stackoverflow
+      ChatGPT
+      */
+  
+
 
     window.addEventListener("load", handleLoad);
 
@@ -19,9 +31,9 @@ namespace Firework {
             [key: string]: string;
             
     }
-   /* interface Sammlung {
+    interface Sammlung {
         feuerwerksdaten: Firework;
-    }*/
+    }
     let responsedata: any[];
     let responseArray: Sammlung[];
     

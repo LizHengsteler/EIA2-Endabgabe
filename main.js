@@ -1,6 +1,16 @@
 "use strict";
 var Firework;
 (function (Firework) {
+    /*Aufgabe: Endabgabe
+     Name: Liz Hengsteler
+     Matrikel: 268386
+     Datum: 12.02.2023
+     Zusammenarbeit: Kristoffer Müller und Theo Züffle
+     Quellen: Inverted Classroom, Jirka Videos + Code
+     W3Schools
+     Stackoverflow
+     ChatGPT
+     */
     window.addEventListener("load", handleLoad);
     Firework.emitters = [];
     let img;
@@ -12,9 +22,6 @@ var Firework;
         TASK[TASK["WAIT"] = 0] = "WAIT";
         TASK[TASK["CATCH"] = 1] = "CATCH";
     })(TASK = Firework.TASK || (Firework.TASK = {}));
-    /* interface Sammlung {
-         feuerwerksdaten: Firework;
-     }*/
     let responsedata;
     let responseArray;
     async function send(_query) {
