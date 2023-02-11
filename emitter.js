@@ -2,7 +2,7 @@
 var Firework;
 (function (Firework) {
     class Emitter {
-        constructor(_mouseX, _mouseY, _color, _radius, _form) {
+        constructor(_mouseX, _mouseY, _color, _radius, _shape) {
             this.lifespan = Math.random() * 2 + 7;
             this.turbulensX = [];
             this.turbulensY = [];
@@ -14,7 +14,7 @@ var Firework;
             this.mouseY = _mouseY;
             this.radius = _radius;
             this.color = _color;
-            this.form = _form;
+            this.shape = _shape;
             this.randomEffekt();
         }
         life() {
@@ -54,7 +54,7 @@ var Firework;
         }
         draw() {
             for (let i = 0; i < this.particleMax; i += 4) {
-                if (this.form == "kreis") {
+                if (this.shape == "kreis") {
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.arc(this.mouseX + this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2, 0, Math.PI * 2);
@@ -76,29 +76,29 @@ var Firework;
                     Firework.crc2.fill();
                     Firework.crc2.closePath();
                 }
-                if (this.form == "rect") {
+                if (this.shape == "rect") {
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     console.log(this.color);
                     Firework.crc2.fillRect(this.mouseX + this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2, this.radius2);
                     Firework.crc2.closePath();
                     Firework.crc2.fillStyle = "white";
-                    Firework.crc2.beginPath;
+                    Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fillRect(this.mouseX - this.turbulensX[i + 1], this.mouseY + this.turbulensY[1 + i], this.radius2, this.radius2);
                     Firework.crc2.closePath();
-                    Firework.crc2.beginPath;
+                    Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fillRect(this.mouseX + this.turbulensX[i + 2], this.mouseY - this.turbulensY[2 + i], this.radius2, this.radius2);
                     Firework.crc2.fill();
                     Firework.crc2.closePath();
-                    Firework.crc2.beginPath;
+                    Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fillRect(this.mouseX - this.turbulensX[i + 3], this.mouseY - this.turbulensY[3 + i], this.radius2, this.radius2);
                     Firework.crc2.fill();
                     Firework.crc2.closePath();
                 }
-                if (this.form == "stern") {
+                if (this.shape == "stern") {
                     Firework.crc2.fillStyle = this.color;
                     this.drawStar(this.mouseX + this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2);
                     this.drawStar(this.mouseX - this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2);

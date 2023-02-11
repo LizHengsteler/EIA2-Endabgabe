@@ -16,7 +16,7 @@ namespace Firework {
     }
    
     interface Firework {
-            [key: string]: string
+            [key: string]: string;
             
     }
    /* interface Sammlung {
@@ -36,7 +36,7 @@ namespace Firework {
         responsedata = <Firework[]>JSON.parse(data);
         responseArray = <Firework[]>responsedata.data;
         console.log(responseArray[ '0' ].radius);
-        for( let i: number = responseArray.length - 1; i > responseArray.length - 5; i --) {
+        for (let i: number = responseArray.length - 1; i > responseArray.length - 5; i --) {
 
     console.log(responseArray[''+i].radius);
     let selectionDiv: any = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
@@ -76,9 +76,6 @@ namespace Firework {
         });
 
     
-    
-        
-        
        
         //Cloud.addEventListener("mousedown", moveCloud);
         window.setInterval(update, 50);
