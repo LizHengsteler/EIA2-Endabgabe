@@ -6,8 +6,8 @@ export  class Emitter  {
      color: string;
      radius: number;
      shape: string;
-     turbulensX: number[] = [];
-     turbulensY: number[] = [];
+     turbulenceX: number[] = [];
+     turbulenceY: number[] = [];
      forceX: number[] = [];
      forceY: number[] = [];
      random: number = 5;
@@ -20,19 +20,15 @@ export  class Emitter  {
     this.color = _color;
     this.shape = _shape;
     this.randomEffekt();
- 
     }
     
     public life(): void {
         if (this.lifespan > 0) {
             this.radius2 = this.radius;
-         
-            
-            this.radius2 *= this.lifespan;
+            this.radius2 *= this.lifespan; //alle 50ms werden die Partikel kleiner, weil neue draw aufgerufen wird und sich die Partikel verkleinern
             this.lifespan -= 0.3;
             this.draw();
-            this.forceEffekt();
-            
+            this.forceEffekt(); 
         }
     }
     public randomEffekt(): void {
@@ -41,18 +37,17 @@ export  class Emitter  {
         this.forceY.push(this.lifespan / 6);
         this.forceX[i] += (Math.random()) * this.random * (this.lifespan / 6);
         this.forceY[i] += (Math.random()) * this.random * (this.lifespan / 6);
-        this.turbulensX.push(this.forceX[i]);
-        this.turbulensY.push(this.forceY[i]);
+        this.turbulenceX.push(this.forceX[i]);
+        this.turbulenceY.push(this.forceY[i]);
         }
        
     }
     public forceEffekt(): void {
         
         for (let i: number = 0; i < this.particleMax; i++) {
-            this.turbulensX[i] += this.forceX[i];
-            this.turbulensY[i] += this.forceY[i];
+            this.turbulenceX[i] += this.forceX[i];
+            this.turbulenceY[i] += this.forceY[i];
             }
-      
     }
 
 public drawStar(x: number, y: number, radius: number): void {
@@ -67,30 +62,29 @@ public drawStar(x: number, y: number, radius: number): void {
 }
 
     public draw(): void {
-for (let i: number = 0; i < this.particleMax; i += 4) {
-    if (this.shape == "kreis") {
+for (let i: number = 0; i < this.particleMax; i += 1) { //Streuung der Partikel
+    if (this.shape == "circle") {
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.arc(this.mouseX +  this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2, 0, Math.PI * 2);
-        crc2.fill();
-        crc2.closePath();
-        
-       
-        crc2.beginPath();
-        crc2.fillStyle = this.color;
-        crc2.arc(this.mouseX  -  this.turbulensX[i + 1], this.mouseY +  this.turbulensY[1 + i], this.radius2, 0, Math.PI * 2);
+        crc2.arc(this.mouseX +  this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2, 0, Math.PI * 2);
         crc2.fill();
         crc2.closePath();
 
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.arc(this.mouseX  +  this.turbulensX[i + 2], this.mouseY - this.turbulensY[2 + i], this.radius2, 0, Math.PI * 2);
+        crc2.arc(this.mouseX  -  this.turbulenceX[i + 1], this.mouseY +  this.turbulenceY[1 + i], this.radius2, 0, Math.PI * 2);
         crc2.fill();
         crc2.closePath();
 
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.arc(this.mouseX  -  this.turbulensX[i + 3], this.mouseY - this.turbulensY[3 + i], this.radius2, 0, Math.PI * 2);
+        crc2.arc(this.mouseX  +  this.turbulenceX[i + 2], this.mouseY - this.turbulenceY[2 + i], this.radius2, 0, Math.PI * 2);
+        crc2.fill();
+        crc2.closePath();
+
+        crc2.beginPath();
+        crc2.fillStyle = this.color;
+        crc2.arc(this.mouseX  -  this.turbulenceX[i + 3], this.mouseY - this.turbulenceY[3 + i], this.radius2, 0, Math.PI * 2);
         crc2.fill();
         crc2.closePath();
 
@@ -99,37 +93,35 @@ for (let i: number = 0; i < this.particleMax; i += 4) {
         crc2.beginPath();
         crc2.fillStyle = this.color;
         console.log(this.color);
-        crc2.fillRect(this.mouseX +  this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2, this.radius2);
-     
+        crc2.fillRect(this.mouseX +  this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2, this.radius2);
         crc2.closePath();
-        crc2.fillStyle = "white";
+        //crc2.fillStyle = "white";
        
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.fillRect(this.mouseX  -  this.turbulensX[i + 1], this.mouseY + this.turbulensY[1 + i], this.radius2, this.radius2);
-     
+        crc2.fillRect(this.mouseX  -  this.turbulenceX[i + 1], this.mouseY + this.turbulenceY[1 + i], this.radius2, this.radius2);
         crc2.closePath();
 
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.fillRect(this.mouseX  +  this.turbulensX[i + 2], this.mouseY - this.turbulensY[2 + i], this.radius2, this.radius2);
+        crc2.fillRect(this.mouseX  +  this.turbulenceX[i + 2], this.mouseY - this.turbulenceY[2 + i], this.radius2, this.radius2);
         crc2.fill();
         crc2.closePath();
 
         crc2.beginPath();
         crc2.fillStyle = this.color;
-        crc2.fillRect(this.mouseX  -  this.turbulensX[i + 3], this.mouseY - this.turbulensY[3 + i], this.radius2, this.radius2);
+        crc2.fillRect(this.mouseX  -  this.turbulenceX[i + 3], this.mouseY - this.turbulenceY[3 + i], this.radius2, this.radius2);
         crc2.fill();
         crc2.closePath();
 
     }
-    if (this.shape == "stern") {
+    if (this.shape == "star") {
       
       crc2.fillStyle = this.color;
-      this.drawStar(this.mouseX +  this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2);
-      this.drawStar(this.mouseX -  this.turbulensX[i + 0], this.mouseY + this.turbulensY[0 + i], this.radius2);
-      this.drawStar(this.mouseX +  this.turbulensX[i + 0], this.mouseY - this.turbulensY[0 + i], this.radius2);
-      this.drawStar(this.mouseX -  this.turbulensX[i + 0], this.mouseY - this.turbulensY[0 + i], this.radius2);
+      this.drawStar(this.mouseX +  this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2);
+      this.drawStar(this.mouseX -  this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2);
+      this.drawStar(this.mouseX +  this.turbulenceX[i + 0], this.mouseY - this.turbulenceY[0 + i], this.radius2);
+      this.drawStar(this.mouseX -  this.turbulenceX[i + 0], this.mouseY - this.turbulenceY[0 + i], this.radius2);
     }
 }
         

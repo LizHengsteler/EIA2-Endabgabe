@@ -25,9 +25,7 @@ a{
     background-repeat: no-repeat;
     background-position: 0 0;
 }
-#circle {
-    background-image: url("kreis_weiß.png") ;
-}
+
 input [type="radio"] :checked + label {
     background-position: 0 - 20px ;
 }

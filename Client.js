@@ -93,7 +93,7 @@ var testMingiDB;
                             element.value = "10";
                             break;
                         case "shape":
-                            element.value = Math.random() < 0.5 ? "rect" : "kreis";
+                            element.value = Math.random() < 0.5 ? "rect" : "circle";
                             break;
                     }
                 });
