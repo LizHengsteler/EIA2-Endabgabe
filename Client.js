@@ -19,7 +19,7 @@ var testMingiDB;
         }
         catch (_e) {
             let output = `Add the correct address of your database as get-parameter in the url.\n`;
-            output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
+            // output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
             output += _e;
             output += `\n\nSee more information in the console.`;
             alert(output);
@@ -29,9 +29,9 @@ var testMingiDB;
     // send a query together with the data if applicable
     async function send(_query, _data) {
         let query = _query + (_data ? "&data=" + JSON.stringify(_data) : "");
-        document.querySelector("input#query").value = query;
+        document.querySelector("input#query").value = query; //zeigt den query an, zu sehen auf form.html
         let response = await fetch(database + query);
-        output(await response.json());
+        output(await response.json()); //output wird in result angezeigt
         return true;
     }
     // show MingiDB's response in the textarea

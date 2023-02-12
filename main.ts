@@ -10,8 +10,6 @@ namespace Firework {
       ChatGPT
       */
   
-
-
     window.addEventListener("load", handleLoad);
 
     //let imageData: ImageData;
@@ -31,11 +29,11 @@ namespace Firework {
             [key: string]: string;
             
     }
-    interface Sammlung {
+    interface Collection {
         feuerwerksdaten: Firework;
     }
     let responsedata: any[];
-    let responseArray: Sammlung[];
+    let responseArray: Collection[];
     
     async function send(_query: string): Promise<boolean> {
        
@@ -52,7 +50,7 @@ namespace Firework {
 
     console.log(responseArray[''+i].radius);
     let selectionDiv: any = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
-    selectionDiv.setAttribute("id",""+i);
+    selectionDiv.setAttribute("id", "" + i);
     selectionDiv.addEventListener("click", changeselection);
 }
        
@@ -60,12 +58,7 @@ namespace Firework {
       }
     
       // show MingiDB's response in the textarea
-     
-
-
-
-    
-
+   
     function changeselection(e: Event): void {
     selection = Number(e.target.id);
 }
@@ -103,18 +96,13 @@ namespace Firework {
                 emitters[i].life();
             }
             
-        
-            
         }
 
     function createBoom(mouseX: number, mouseY: number, selection: number): void {
 
-           
-                console.log(responseArray[''+selection].radius);
-                let emitter: Emitter = new Emitter(mouseX, mouseY, responseArray[''+selection].color, responseArray[''+selection].radius , responseArray[''+selection].shape);
+                console.log(responseArray['' + selection].radius);
+                let emitter: Emitter = new Emitter(mouseX, mouseY, responseArray['' + selection].color, responseArray['' + selection].radius , responseArray['' + selection].shape);
                 emitters.push(emitter);
-            
-        
         
         }
  }
