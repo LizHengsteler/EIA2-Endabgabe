@@ -8,8 +8,8 @@ var Firework;
             this.turbulenceY = [];
             this.forceX = [];
             this.forceY = [];
-            this.random = 5;
-            this.particleMax = 40;
+            this.random = 10;
+            this.particleMax = 200;
             this.mouseX = _mouseX;
             this.mouseY = _mouseY;
             this.radius = _radius;
@@ -20,7 +20,7 @@ var Firework;
         life() {
             if (this.lifespan > 0) {
                 this.radius2 = this.radius;
-                this.radius2 *= this.lifespan; //alle 50ms werden die Partikel kleiner, weil neue draw aufgerufen wird und sich die Partikel verkleinern
+                this.radius2 *= this.lifespan;
                 this.lifespan -= 0.3;
                 this.draw();
                 this.forceEffekt();
@@ -53,7 +53,7 @@ var Firework;
             Firework.crc2.fill();
         }
         draw() {
-            for (let i = 0; i < this.particleMax; i += 1) { //Streuung der Partikel
+            for (let i = 0; i < this.particleMax; i += 4) {
                 if (this.shape == "circle") {
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
@@ -82,7 +82,6 @@ var Firework;
                     console.log(this.color);
                     Firework.crc2.fillRect(this.mouseX + this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2, this.radius2);
                     Firework.crc2.closePath();
-                    //crc2.fillStyle = "white";
                     Firework.crc2.beginPath();
                     Firework.crc2.fillStyle = this.color;
                     Firework.crc2.fillRect(this.mouseX - this.turbulenceX[i + 1], this.mouseY + this.turbulenceY[1 + i], this.radius2, this.radius2);

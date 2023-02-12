@@ -2,7 +2,7 @@ namespace Firework {
 export  class Emitter  {
      mouseX: number;
      mouseY: number;
-     lifespan: number = Math.random() * 2 + 7;
+     lifespan: number = Math.random() * 2 + 7; 
      color: string;
      radius: number;
      shape: string;
@@ -10,9 +10,9 @@ export  class Emitter  {
      turbulenceY: number[] = [];
      forceX: number[] = [];
      forceY: number[] = [];
-     random: number = 5;
+     random: number = 10;
      radius2: number;
-     particleMax: number = 40;
+     particleMax: number = 200;
     constructor(_mouseX: number, _mouseY: number, _color: string, _radius: number, _shape: string) {
     this.mouseX = _mouseX;
     this.mouseY = _mouseY;
@@ -25,7 +25,7 @@ export  class Emitter  {
     public life(): void {
         if (this.lifespan > 0) {
             this.radius2 = this.radius;
-            this.radius2 *= this.lifespan; //alle 50ms werden die Partikel kleiner, weil neue draw aufgerufen wird und sich die Partikel verkleinern
+            this.radius2 *= this.lifespan; 
             this.lifespan -= 0.3;
             this.draw();
             this.forceEffekt(); 
@@ -33,7 +33,7 @@ export  class Emitter  {
     }
     public randomEffekt(): void {
         for (let i: number = 0; i < this.particleMax; i++) {
-        this.forceX.push(this.lifespan / 6);
+        this.forceX.push(this.lifespan / 6); 
         this.forceY.push(this.lifespan / 6);
         this.forceX[i] += (Math.random()) * this.random * (this.lifespan / 6);
         this.forceY[i] += (Math.random()) * this.random * (this.lifespan / 6);
@@ -42,8 +42,7 @@ export  class Emitter  {
         }
        
     }
-    public forceEffekt(): void {
-        
+    public forceEffekt(): void { 
         for (let i: number = 0; i < this.particleMax; i++) {
             this.turbulenceX[i] += this.forceX[i];
             this.turbulenceY[i] += this.forceY[i];
@@ -62,7 +61,7 @@ public drawStar(x: number, y: number, radius: number): void {
 }
 
     public draw(): void {
-for (let i: number = 0; i < this.particleMax; i += 1) { //Streuung der Partikel
+for (let i: number = 0; i < this.particleMax; i += 4) { 
     if (this.shape == "circle") {
         crc2.beginPath();
         crc2.fillStyle = this.color;
@@ -95,7 +94,6 @@ for (let i: number = 0; i < this.particleMax; i += 1) { //Streuung der Partikel
         console.log(this.color);
         crc2.fillRect(this.mouseX +  this.turbulenceX[i + 0], this.mouseY + this.turbulenceY[0 + i], this.radius2, this.radius2);
         crc2.closePath();
-        //crc2.fillStyle = "white";
        
         crc2.beginPath();
         crc2.fillStyle = this.color;

@@ -26,14 +26,12 @@ namespace Firework {
     }
    
     interface Firework {
-            [key: string]: string;
+            [key: string]: string; 
             
     }
-    interface Collection {
-        feuerwerksdaten: Firework;
-    }
-    let responsedata: any[];
-    let responseArray: Collection[];
+    
+    let responsedata: Firework[];
+    let responseArray: Firework[];
     
     async function send(_query: string): Promise<boolean> {
        
@@ -46,11 +44,11 @@ namespace Firework {
         responsedata = <Firework[]>JSON.parse(data);
         responseArray = <Firework[]>responsedata.data;
         console.log(responseArray[ '0' ].radius);
-        for (let i: number = responseArray.length - 1; i > responseArray.length - 5; i --) {
+        for (let i: number = responseArray.length - 1; i > responseArray.length - 5; i --) { 
 
-    console.log(responseArray[''+i].radius);
-    let selectionDiv: any = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
-    selectionDiv.setAttribute("id", "" + i);
+    console.log(responseArray["" + i].radius); 
+    let selectionDiv: any = document.getElementsByClassName("rockets")[responseArray.length - i - 1]; 
+    selectionDiv.setAttribute("id", "" + i); 
     selectionDiv.addEventListener("click", changeselection);
 }
        
@@ -59,8 +57,8 @@ namespace Firework {
     
       // show MingiDB's response in the textarea
    
-    function changeselection(e: Event): void {
-    selection = Number(e.target.id);
+    function changeselection(e: Event): void { 
+    selection = Number(e.target.id); 
 }
 
     function handleLoad(_event: Event): void {

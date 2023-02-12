@@ -32,7 +32,7 @@ var Firework;
         responseArray = responsedata.data;
         console.log(responseArray['0'].radius);
         for (let i = responseArray.length - 1; i > responseArray.length - 5; i--) {
-            console.log(responseArray['' + i].radius);
+            console.log(responseArray["" + i].radius);
             let selectionDiv = document.getElementsByClassName("rockets")[responseArray.length - i - 1];
             selectionDiv.setAttribute("id", "" + i);
             selectionDiv.addEventListener("click", changeselection);

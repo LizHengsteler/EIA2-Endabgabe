@@ -6,7 +6,7 @@
  * @see www.github.com/JirkaDellOro/MingiDB
  * @license MIT License
  */
-namespace testMingiDB {
+namespace Firework {
   window.addEventListener("load", start);
   let database: string = "https://webuser.hs-furtwangen.de/~hengstel/Database/";
   console.log(database);
@@ -17,7 +17,7 @@ namespace testMingiDB {
       
     } catch (_e: unknown) {
       let output: string = `Add the correct address of your database as get-parameter in the url.\n`;
-     // output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
+      output += `https://webuser.hs-furtwangen.de/~hengstel/Database/\n\n`;
       output += _e;
       output += `\n\nSee more information in the console.`;
       alert(output);
@@ -28,10 +28,9 @@ namespace testMingiDB {
   // send a query together with the data if applicable
   async function send(_query: string, _data: Object): Promise<boolean> {
     let query: string = _query + (_data ? "&data=" + JSON.stringify(_data) : "");
-    (<HTMLInputElement>document.querySelector("input#query")).value = query; //zeigt den query an, zu sehen auf form.html
-
+    (<HTMLInputElement>document.querySelector("input#query")).value = query; 
     let response: Response = await fetch(database + query);
-    output(await response.json()); //output wird in result angezeigt
+    output(await response.json()); 
     return true;
   }
 
@@ -82,7 +81,7 @@ namespace testMingiDB {
   }
 
   // for convenience, clear or randomly fill the fields of the document-fieldset when clicking on the anchors
-  function hndAnchor(_event: Event): void {
+  /*function hndAnchor(_event: Event): void {
     let command: string = (<HTMLElement>_event.target).textContent;
     let fields: string[] = ["color", "radius", "shape"];
     console.log(command);
@@ -108,5 +107,5 @@ namespace testMingiDB {
         });
         break;
     }
-  }
+  }*/
 }
